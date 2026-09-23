@@ -17,15 +17,29 @@ Problem:  Write a program that keeps and manipulates a linked list of
 public class LinkedList{
 
   //instance varialbes go here (think about what you need to keep track of!)
-
+ListNode nose;
+  
   //constructors go here
-
+public LinkedList(){
+  nose = null;
+}
 
   //precondition: the list has been initialized
   //postcondition: the ListNode containing the appropriate value has been added and returned
   public ListNode addAValue(String line)
   {
-    return null;
+    ListNode add = new ListNode(line,null);
+    ListNode node = nose;
+    while(node.getNext()!=null){
+      if(node.getValue().compareto(line)>0){
+        add.setNext(node.getNext());
+        node.setNext(add);
+      return add;
+      }
+      node = node.getNext();
+    }
+    node.setNext(add);
+    return add;
   }
 
   //precondition: the list has been initialized
@@ -33,7 +47,19 @@ public class LinkedList{
   //if the value is not in the list returns null
   public ListNode deleteAValue(String line)
   {
+    ListNode node = nose;
+    while(node.getNext()!=null){
+      if(node.getNext().getValue().equals(line)){
+        node.setNext(node.getNext().getNext());
+      return line;
+      }
+    }
+    if(nose.getValue().equals(line)){
+      nose = nose.getNext();
+      return line;
+    }
     return null;
+  
   }
 
   //precondition: the list has been initialized
