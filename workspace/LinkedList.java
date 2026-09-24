@@ -14,24 +14,37 @@ Problem:  Write a program that keeps and manipulates a linked list of
 	Output:  the results to the screen of each menu
 	    choice, and error messages where appropriate.
 */
+
+import java.util.List;
+
 public class LinkedList{
 
   //instance varialbes go here (think about what you need to keep track of!)
 ListNode nose;
   
   //constructors go here
+public LinkedList(String value){
+  nose = new ListNode(value,null);
+}
 public LinkedList(){
   nose = null;
 }
 
   //precondition: the list has been initialized
   //postcondition: the ListNode containing the appropriate value has been added and returned
-  public ListNode addAValue(String line)
-  {
-    ListNode add = new ListNode(line,null);
+  public ListNode addAValue(String line){
     ListNode node = nose;
+    ListNode add = new ListNode(line,null);
+    if(nose == null){
+      nose = new ListNode(line,null);
+      return nose;
+    }else if(nose.getValue().compareTo(line)>0){
+      add.setNext(nose);
+      nose = add;
+      return add;
+    }
     while(node.getNext()!=null){
-      if(node.getValue().compareto(line)>0){
+      if(node.getNext().getValue().compareTo(line)>0){
         add.setNext(node.getNext());
         node.setNext(add);
       return add;
@@ -47,32 +60,42 @@ public LinkedList(){
   //if the value is not in the list returns null
   public ListNode deleteAValue(String line)
   {
-    ListNode node = nose;
+    ListNode node = nose;   
+    if(nose.getValue().equals(line)){
+      ListNode temp = new ListNode(node.getValue(),node);
+      nose = nose.getNext();
+      return temp;
+    } 
+    node = nose;
+    
     while(node.getNext()!=null){
       if(node.getNext().getValue().equals(line)){
+        ListNode temp = new ListNode(node.getNext().getValue(),node.getNext());
         node.setNext(node.getNext().getNext());
-      return line;
+      return temp;
       }
-    }
-    if(nose.getValue().equals(line)){
-      nose = nose.getNext();
-      return line;
+      node = node.getNext();
     }
     return null;
-  
   }
 
   //precondition: the list has been initialized
   //postconditions: returns a string containing all values appended together with spaces between.
   public String showValues()
   {
-    return null;
+    String list = "";
+    ListNode node = nose;
+    while(node!=null){
+      list+= node.getValue()+" ";
+      node = node.getNext();
+    }
+      return list;
   }
 
   //precondition: the list has been initialized
   //postconditions: clears the list.
   public void clear()
   {
-  
+  nose = null;
   }
 }
