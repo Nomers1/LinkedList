@@ -1,5 +1,5 @@
 public class ListNode
-{
+{ 
 	// instance properties
 	
 	private String value;
@@ -16,6 +16,11 @@ public class ListNode
 	{
 		value = initValue;
 		next = initNext;
+		return;
+	}
+
+	public ListNode (ListNode node)
+	{
 		return;
 	}
 	
@@ -36,6 +41,7 @@ public class ListNode
 	{
 		return next;
 	}
+
 	
 	
 	// mutators
